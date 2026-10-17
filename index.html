@@ -1,322 +1,191 @@
 
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-<title>Glowvé | Modern Skincare & Beauty</title>
-  <meta name="description" content="Discover your everyday skincare ritual with LUMIÈRE SKIN. Explore cleansers, serums, moisturisers and more.">
-  <meta name="theme-color" content="#f7edf0">
-  <link rel="preconnect" href="https://images.unsplash.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fbf6f0">
+  <meta name="description" content="Discover Glowvé skincare essentials, daily rituals and skin-loving favourites.">
+  <title>Glowvé — Skincare, Made Beautiful</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <div class="announcement">A LITTLE GLOW GOES A LONG WAY · DEMO STORE</div>
+  <div class="announcement">
+    YOUR DAILY REMINDER TO GLOW · FREE SHIPPING ON ORDERS OVER ₹999
+  </div>
 
-  <header class="header">
-    <a class="logo" href="index.html">Glowve<span>SKIN</span></a>
-    <button id="menuToggle" class="menu" aria-label="Toggle navigation">☰</button>
-    <nav id="nav">
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Glowvé home">Glowvé<span>.</span></a>
+
+    <nav class="main-nav" aria-label="Main navigation">
       <a href="#shop">Shop</a>
-      <a href="#skin-quiz">Skin quiz</a>
+      <a href="#ritual">Our ritual</a>
       <a href="#reviews">Reviews</a>
-      <a href="#orders">My orders</a>
     </nav>
-    <div class="head-actions">
-      <button id="wishlistToggle" aria-label="Show wishlist">♡ <span id="wishlistCount">0</span></button>
-      <button id="cartOpen">Bag (<span id="headerCartCount">0</span>)</button>
-      <button id="loginOpen">Sign in</button>
+
+    <div class="header-actions">
+      <button class="icon-button" id="searchToggle" aria-label="Open search">⌕</button>
+      <a class="header-link" href="#shop">Explore</a>
+      <button class="icon-button" id="wishlistToggle" aria-label="View wishlist">
+        ♡ <span id="wishlistCount">0</span>
+      </button>
+      <button class="cart-button" id="cartToggle">Bag <span id="cartCount">0</span></button>
     </div>
   </header>
+
+  <div class="search-panel" id="searchPanel" hidden>
+    <label for="productSearch">Find your next favourite</label>
+    <input id="productSearch" type="search" placeholder="Search serum, cleanser, moisturiser...">
+  </div>
 
   <main>
-    
+    <section class="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">YOUR SKIN, YOUR KIND OF GLOW</span>
+        <h1>Feel good<br>in your <em>own skin.</em></h1>
+        <p>Thoughtful skincare. Beautifully simple rituals. Everyday essentials that help your natural glow take centre stage.</p>
+        <div class="hero-actions">
+          <a class="button button-dark" href="#shop">Shop the collection <span>↗</span></a>
+          <a class="text-link" href="#ritual">Discover our ritual ↓</a>
+        </div>
+        <div class="hero-points">
+          <span>✳ Thoughtful formulas</span>
+          <span>✳ Everyday essentials</span>
+          <span>✳ Made for your routine</span>
+        </div>
+      </div>
 
+      <div class="hero-visual">
+        <img
+          src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=1400&q=85"
+          alt="Skincare products arranged in a soft natural beauty setting"
+          fetchpriority="high">
+        <div class="floating-card floating-top">
+          <span class="floating-icon">✳</span>
+          <div><strong>Your glow era</strong><small>Starts with a ritual</small></div>
+        </div>
+        <div class="floating-card floating-bottom">
+          <small>THE EVERYDAY EDIT</small>
+          <strong>Simple steps.<br>Lovely skin days.</strong>
+          <a href="#shop">Explore essentials ↗</a>
+        </div>
+        <span class="image-caption">A LITTLE CARE GOES A LONG WAY</span>
+      </div>
+    </section>
 
-<section class="cream-hero">
-  <img
-    class="cream-hero-model"
-    src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=1800&q=90"
-    alt="Beauty portrait for the LUMIÈRE SKIN skincare collection"
-  >
-  <div class="cream-hero-overlay"></div>
-
-  <header class="cream-hero-nav">
-    <a href="index.html" class="cream-brand">✿ <span>LUMIÈRE SKIN</span></a>
-
-    <nav>
-      <a href="#shop">Beauty Space</a>
-      <a href="#reviews">Our Reviews</a>
-      <a href="#shop">Products</a>
-    </nav>
-
-    <div class="cream-nav-actions">
-      <a href="#shop" aria-label="Shop products">♡</a>
-      <button id="cartOpen" type="button">Bag (<span id="headerCartCount">0</span>)</button>
-    </div>
-  </header>
-
-  <div class="cream-hero-copy">
-    <p class="cream-kicker">YOUR SKINCARE, YOUR RITUAL</p>
-    <h1>Flourish in<br>Daily Power</h1>
-    <p>
-      Give life to your inner world and flourish in your uniqueness.
-      Discover skincare essentials for your everyday glow.
-    </p>
-    <a href="#shop" class="cream-shop-button">Explore Collection ↗</a>
-  </div>
-
-  <div class="cream-social-proof">
-    <div class="cream-avatar-row">
-      <span>✿</span><span>✧</span><span>◉</span>
-    </div>
-    <strong>750K+</strong>
-    <p>Everyday beauty rituals</p>
-  </div>
-
-  <a href="#shop" class="cream-feature">
-    <small>THE DAILY ESSENTIAL</small>
-    <strong>Ultimate Skin Recovery</strong>
-    <span>Discover your next favourite ↗</span>
-  </a>
-
-  <div class="cream-product-card cream-card-left">
-    <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=450&q=80" alt="Skincare serum">
-    <strong>Hydrating Serum</strong>
-    <small>Everyday hydration</small>
-    <a href="#shop">Shop ↗</a>
-  </div>
-
-  <div class="cream-product-card cream-card-middle">
-    <img src="https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=450&q=80" alt="Daily moisturiser">
-    <strong>Daily Moisture</strong>
-    <small>Your daily ritual</small>
-    <a href="#shop">Shop ↗</a>
-  </div>
-
-  <a href="#shop" class="cream-product-card cream-card-right">
-    <img src="https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=450&q=80" alt="Skincare collection">
-    <strong>Glow Essentials</strong>
-    <small>Explore collection ↗</small>
-  </a>
-
-  <div class="cream-hero-footer">
-    <span>01 — THE EVERYDAY EDIT</span>
-    <span>MADE FOR YOUR NATURAL GLOW ✧</span>
-  </div>
-</section>
-
-
-    <div class="strip">
-      <span>✦</span> THOUGHTFUL ROUTINES <span>✦</span>
-      EVERYDAY ESSENTIALS <span>✦</span>
-      YOUR PACE, YOUR GLOW <span>✦</span> THE GLOW EDIT
+    <div class="ticker" aria-label="Glowvé skincare philosophy">
+      <span>YOUR SKIN, YOUR PACE</span><i>✳</i>
+      <span>THOUGHTFUL ROUTINES</span><i>✳</i>
+      <span>EVERYDAY ESSENTIALS</span><i>✳</i>
+      <span>LET YOURSELF GLOW</span>
     </div>
 
-    <section class="section" id="shop">
-      <div class="section-title">
+    <section class="section shop-section" id="shop">
+      <div class="section-heading">
         <div>
-          <p class="eyebrow">THE EDIT</p>
-          <h2>Meet your new shelf favourites</h2>
+          <span class="eyebrow">THE GLOW EDIT</span>
+          <h2>Your shelf's<br>new <em>favourites.</em></h2>
         </div>
-        <p>From your first cleanse to your final SPF step—find your everyday favourites.</p>
+        <p>Meet the feel-good essentials that make caring for your skin the best part of your day.</p>
       </div>
 
-      <div class="tools">
-        <input id="productSearch" type="search" placeholder="Search products..." aria-label="Search products">
-        <div id="categoryFilters">
-          <button class="filter active" data-category="all">All</button>
-          <button class="filter" data-category="exfoliant">Exfoliate</button>
-          <button class="filter" data-category="essence">Essence</button>
-          <button class="filter" data-category="serum">Serums</button>
-          <button class="filter" data-category="moisturiser">Moisturise</button>
-          <button class="filter" data-category="toner">Toners</button>
-          <button class="filter" data-category="treatment">Treatments</button>
-          <button class="filter" data-category="sunscreen">SPF</button>
-          <button class="filter" data-category="cleanser">Cleansers</button>
+      <div class="shop-tools">
+        <div class="filter-tabs" aria-label="Filter products">
+          <button class="filter-button active" data-filter="All">All products</button>
+          <button class="filter-button" data-filter="Cleanser">Cleansers</button>
+          <button class="filter-button" data-filter="Serum">Serums</button>
+          <button class="filter-button" data-filter="Moisturiser">Moisturisers</button>
         </div>
+        <span class="result-count" id="resultCount">Our essentials</span>
       </div>
-      <div class="products" id="productGrid"></div>
-      <p class="note">Demo storefront: product descriptions, prices and ratings are illustrative.</p>
+
+      <div class="product-grid" id="productGrid"></div>
+      <p class="empty-state" id="emptyState" hidden>No products found. Try another search.</p>
     </section>
 
-    <section class="quiz-section section" id="skin-quiz">
-      <div>
-        <p class="eyebrow">YOUR PERSONAL SKINCARE GUIDE</p>
-        <h2>Let's find your skin's happy place.</h2>
-        <p>Choose how your skin usually feels by midday.</p>
+    <section class="ritual-section" id="ritual">
+      <div class="ritual-image">
+        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1200&q=85" alt="Relaxing facial skincare ritual" loading="lazy">
       </div>
-      <div class="panel">
-        <h3>What sounds most like your skin?</h3>
-        <div class="quiz-options">
-          <label><input type="radio" name="skinType" value="oily"> ✨ <b>Oily</b><small>Often looks shiny</small></label>
-          <label><input type="radio" name="skinType" value="dry"> 🌿 <b>Dry</b><small>Often feels tight</small></label>
-          <label><input type="radio" name="skinType" value="combination"> 🌸 <b>Combination</b><small>Some areas oily, some dry</small></label>
-          <label><input type="radio" name="skinType" value="sensitive"> 🤍 <b>Sensitive</b><small>May react to products</small></label>
+      <div class="ritual-copy">
+        <span class="eyebrow">SLOW DOWN. GLOW UP.</span>
+        <h2>Your routine.<br>Your <em>little ritual.</em></h2>
+        <p>Skincare doesn't need to be complicated. Give yourself a few calm minutes each day, choose products that suit your skin, and let consistency do its thing.</p>
+        <div class="ritual-steps">
+          <div><span>01</span><p><strong>Cleanse gently</strong><small>Start with a fresh canvas.</small></p></div>
+          <div><span>02</span><p><strong>Care with intention</strong><small>Choose a serum for your needs.</small></p></div>
+          <div><span>03</span><p><strong>Seal in moisture</strong><small>Finish with your moisturiser.</small></p></div>
         </div>
-        <button id="skinQuizSubmit" class="btn wide" type="button">Find my products</button>
-        <div id="skinQuizResult" class="result" aria-live="polite" hidden></div>
-        <p class="note">General suggestions only, not medical advice. Check ingredients and patch-test new products.</p>
+        <a class="button button-dark" href="#shop">Find your essentials ↗</a>
       </div>
     </section>
 
-    <section class="story section" id="story">
-      <img src="https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=1000&q=85" alt="Minimal skincare products" loading="lazy">
-      <div>
-        <p class="eyebrow">A GENTLER KIND OF GLOW</p>
-        <h2>Less noise.<br><em>More ritual.</em></h2>
-        <p>Skincare can be simple: understand your skin, choose thoughtfully, and give your routine time. LUMIÈRE SKIN is a demo brand concept.</p>
-        <a class="text-link" href="#shop">Discover the edit ↗</a>
-      </div>
+    <section class="quote-section" id="reviews">
+      <span class="eyebrow">KIND WORDS, REAL ROUTINES</span>
+      <h2>Little rituals.<br><em>Feel-good moments.</em></h2>
+      <p>Discover the Glowvé collection and find the essentials that feel right for your skin.</p>
+      <a class="button button-light" href="#shop">Explore the collection ↗</a>
     </section>
-
-    <section class="section" id="reviews">
-      <div class="section-title">
-        <div><p class="eyebrow">KIND WORDS</p><h2>Notes from the routine</h2></div>
-        <p>Sample reviews are demos, not verified testimonials.</p>
-      </div>
-      <div class="reviews">
-        <article><b class="stars">★★★★★</b><p>“The routine feels simple and easy to understand.”</p><small>— Demo review</small></article>
-        <article><b class="stars">★★★★★</b><p>“Love the calm look and clear product details.”</p><small>— Demo review</small></article>
-        <article><b class="stars">★★★★☆</b><p>“A lovely concept for everyday habits.”</p><small>— Demo review</small></article>
-      </div>
-      <form id="reviewForm" class="review-form">
-        <h3>Write a demo review</h3>
-        <p class="note">Saved only in this browser; not verified or sent anywhere.</p>
-        <div class="form-row">
-          <label>Name<input id="reviewName" maxlength="40" required></label>
-          <label>Rating<select id="reviewRating"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select></label>
-        </div>
-        <label>Your note<textarea id="reviewText" maxlength="400" rows="3" required></textarea></label>
-        <button class="btn" type="submit">Add demo review</button>
-        <div id="userReviews"></div>
-      </form>
-    </section>
-
-    <section class="section orders-section" id="orders">
-      <div class="section-title">
-        <div><p class="eyebrow">YOUR ACCOUNT</p><h2>My demo orders</h2></div>
-        <p>Your sample order history is stored locally in this browser.</p>
-      </div>
-      <div id="orderHistory"><p class="empty">Sign in and place a demo order to see it here.</p></div>
-    </section>
-
-
-<section class="order-tracking section" id="order-tracking">
-  <div class="tracking-heading">
-    <p class="eyebrow">YOUR ORDER, YOUR PEACE OF MIND</p>
-    <h2>Track your <em>glow.</em></h2>
-    <p>Enter your demo order ID to see your order details and status.</p>
-  </div>
-
-  <form id="trackingForm" class="tracking-form">
-    <label for="trackingOrderId">Order ID</label>
-    <div class="tracking-input-row">
-      <input
-        id="trackingOrderId"
-        type="text"
-        placeholder="e.g. LUM-DEMO-1234567"
-        autocomplete="off"
-        required
-      >
-      <button type="submit" class="btn">Track Order ↗</button>
-    </div>
-  </form>
-
-  <div id="trackingResult" class="tracking-result" aria-live="polite" hidden></div>
-
-  <p class="tracking-note">
-    Demo tracking only. Orders are stored in this browser and are not connected to a real courier.
-  </p>
-</section>
-
 
     <section class="newsletter">
-      <p class="eyebrow">A NOTE FROM US</p>
-      <h2>A little glow in your inbox.</h2>
-      <p>Skincare notes, simple rituals and occasional offers.</p>
-      <form id="newsletterForm">
-        <input type="email" id="newsletterEmail" placeholder="Your email address" required>
-        <button class="btn">Join us ↗</button>
+      <div>
+        <span class="eyebrow">A LITTLE NOTE FROM US</span>
+        <h2>Good skin days<br>start <em>right here.</em></h2>
+      </div>
+      <form id="newsletterForm" class="newsletter-form">
+        <label for="newsletterEmail">Get the occasional glow note.</label>
+        <div class="newsletter-input">
+          <input id="newsletterEmail" type="email" placeholder="Your email address" required>
+          <button type="submit" aria-label="Subscribe">↗</button>
+        </div>
+        <small id="newsletterMessage">Skincare tips and updates, minus the noise.</small>
       </form>
-      <small>Demo form only—no email is sent.</small>
     </section>
   </main>
 
-  <footer>
-    <a class="logo" href="index.html">LUMIÈRE <span>SKIN</span></a>
-    <p>Make room for your everyday glow.</p>
-    <small>© <span id="currentYear"></span> LUMIÈRE SKIN · Demo storefront</small>
+  <footer class="site-footer">
+    <a class="brand footer-brand" href="index.html">Glowvé<span>.</span></a>
+    <p>Skincare, made beautiful.</p>
+    <div class="footer-links">
+      <a href="#shop">Shop</a>
+      <a href="#ritual">Our ritual</a>
+      <a href="product.html">Product details</a>
+    </div>
+    <small>© <span id="year"></span> Glowvé. A skincare demo store.</small>
   </footer>
 
-  <!-- Shopping bag drawer -->
-  <div id="cartOverlay" class="overlay"></div>
-  <aside id="cartDrawer" class="drawer" aria-hidden="true">
-    <div class="drawer-head">
-      <div><p class="eyebrow">YOUR LITTLE COLLECTION</p><h2>Your bag (<span id="drawerCartCount">0</span>)</h2></div>
-      <button id="cartClose" class="close" aria-label="Close bag">×</button>
+  <div class="overlay" id="overlay" hidden></div>
+
+  <aside class="drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
+    <div class="drawer-heading">
+      <div><span class="eyebrow">YOUR PICKS</span><h2>Your bag</h2></div>
+      <button class="close-button" data-close aria-label="Close bag">×</button>
     </div>
-    <div class="shipping">
-      <p id="shippingMessage">Add products to get free shipping.</p>
-      <div class="track"><span id="shippingProgress"></span></div>
+    <div class="drawer-items" id="cartItems"></div>
+    <div class="drawer-footer">
+      <div class="subtotal"><span>Subtotal</span><strong id="cartSubtotal">₹0</strong></div>
+      <p class="small-note">Demo checkout only. No payment will be collected.</p>
+      <button class="button button-dark full-button" id="checkoutButton">Continue to checkout</button>
     </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="coupon">
-      <input id="couponInput" placeholder="Coupon code" aria-label="Coupon code">
-      <button id="applyCoupon" class="btn" type="button">Apply</button>
-    </div>
-    <p id="couponMessage" class="note"></p>
-    <div class="totals">
-      <p>Subtotal <b id="cartSubtotal">₹0</b></p>
-      <p>Discount <b id="cartDiscount">₹0</b></p>
-      <p>Shipping <b id="cartShipping">₹0</b></p>
-      <p class="grand">Total <b id="cartTotal">₹0</b></p>
-    </div>
-    <button id="checkoutButton" class="btn wide" type="button">Continue to demo checkout</button>
-    <p class="note">Demo only. No payment is taken.</p>
   </aside>
 
-  <!-- Demo assistant -->
-  <div id="chatBackdrop" class="chat-backdrop" hidden>
-    <section class="chat">
-      <div class="drawer-head">
-        <div><p class="eyebrow">LUMIÈRE ASSIST</p><h2>How can we help?</h2></div>
-        <button id="chatClose" class="close" aria-label="Close chat">×</button>
-      </div>
-      <div id="chatMessages" class="chat-messages" aria-live="polite">
-        <p class="bubble bot">Hi! I'm the demo assistant. Ask about shipping, coupons, or products.</p>
-      </div>
-      <div class="quick">
-        <button data-chat="shipping">Shipping</button>
-        <button data-chat="coupon">Coupon</button>
-        <button data-chat="products">Products</button>
-      </div>
-      <form id="chatForm">
-        <input id="chatInput" placeholder="Type a message..." maxlength="250" required>
-        <button class="btn">Send</button>
-      </form>
-      <small class="note">Automated demo replies only; no live agent.</small>
-    </section>
-  </div>
-  <button id="chatOpen" class="chat-launch">✳ <span>Need help?</span></button>
-  <div id="toast" class="toast" role="status"></div>
+  <aside class="drawer" id="wishlistDrawer" aria-label="Wishlist" aria-hidden="true">
+    <div class="drawer-heading">
+      <div><span class="eyebrow">SAVED WITH LOVE</span><h2>Your wishlist</h2></div>
+      <button class="close-button" data-close aria-label="Close wishlist">×</button>
+    </div>
+    <div class="drawer-items" id="wishlistItems"></div>
+  </aside>
 
-  <!-- DEMO CHECKOUT: no real login, orders, or payments -->
-  <div class="checkout-backdrop" id="checkoutBackdrop" hidden>
-    <section class="checkout-modal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
-      <button class="checkout-x" id="checkoutClose" aria-label="Close checkout">×</button>
-      <div class="checkout-progress">
-        <span class="active" data-step-dot="1">1</span><i></i>
-        <span data-step-dot="2">2</span><i></i>
-        <span data-step-dot="3">3</span>
-      </div>
-      <p class="eyebrow">LUMIÈRE SKIN · CHECKOUT DEMO</p>
-      <h2 id="checkoutTitle">Welcome back</h2>
-      <p class="checkout-subtitle" id="checkoutSubtitle">Sign in or create a demo account to continue.</p>
-      <div id="checkoutStepContent"></div>
-      <p class="checkout-disclaimer">Demo only: do not enter real passwords or payment details. No bank, UPI or card payment is processed. Demo order data stays in this browser.</p>
-    </section>
-  </div>
+  <dialog class="product-dialog" id="productDialog">
+    <button class="close-button dialog-close" id="dialogClose" aria-label="Close details">×</button>
+    <div id="productDialogContent"></div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
 </body>
 </html>
