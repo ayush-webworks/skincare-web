@@ -1472,3 +1472,382 @@ footer small { color: #ddcbd4; }
     height: 145px;
   }
 }
+
+
+/* CINEMATIC LUXURY SKINCARE HERO */
+.cinema-hero {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  min-height: 610px;
+  overflow: hidden;
+  color: #fff;
+  background: #382319;
+  font-family: Arial, sans-serif;
+}
+
+.cinema-background {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image: url("https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=2000&q=90");
+  background-size: cover;
+  background-position: center 38%;
+  transform: scale(1.02);
+}
+
+.cinema-shade {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    linear-gradient(90deg, rgba(28, 17, 12, .74) 0%, rgba(28, 17, 12, .35) 46%, rgba(28, 17, 12, .08) 100%),
+    linear-gradient(0deg, rgba(26, 17, 12, .65) 0%, transparent 36%);
+}
+
+.cinema-nav {
+  min-height: 62px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 30px;
+  background: rgba(250, 247, 241, .95);
+  color: #241d18;
+}
+
+.cinema-logo {
+  color: #241d18;
+  font-family: Georgia, serif;
+  font-size: 15px;
+  letter-spacing: 1px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cinema-logo span {
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.cinema-links {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.cinema-links a {
+  padding: 9px 15px;
+  border-radius: 30px;
+  text-decoration: none;
+  color: #30251e;
+  font-size: 12px;
+}
+
+.cinema-links a.selected,
+.cinema-links a:hover {
+  background: #28221d;
+  color: white;
+}
+
+.cinema-menu {
+  color: #30251e;
+  font-size: 12px;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.cinema-intro {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+  padding: 65px 30px 190px;
+}
+
+.cinema-overline {
+  margin: 0 0 14px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.cinema-intro h1 {
+  margin: 0;
+  max-width: 780px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(54px, 8.3vw, 112px);
+  font-weight: 400;
+  line-height: .91;
+  letter-spacing: -4px;
+}
+
+.cinema-intro h1 em {
+  font-weight: 400;
+}
+
+.cinema-description {
+  max-width: 320px;
+  margin: 24px 0 22px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(255,255,255,.85);
+}
+
+.cinema-button {
+  display: inline-block;
+  padding: 13px 19px;
+  color: #fff;
+  background: #171411;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 30px;
+  text-decoration: none;
+  font-size: 12px;
+  transition: background .2s, transform .2s;
+}
+
+.cinema-button:hover {
+  background: #6d4b37;
+  transform: translateY(-2px);
+}
+
+.cinema-side-note {
+  position: absolute;
+  right: 30px;
+  top: 115px;
+  font-size: 10px;
+  line-height: 1.8;
+  letter-spacing: 2px;
+  text-align: right;
+  color: rgba(255,255,255,.85);
+}
+
+.cinema-feature {
+  position: absolute;
+  z-index: 2;
+  right: 22px;
+  bottom: 42px;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 490px;
+}
+
+.cinema-feature-copy {
+  width: 175px;
+  padding: 14px 5px;
+  text-shadow: 0 1px 12px rgba(0,0,0,.4);
+}
+
+.cinema-feature-copy .cinema-overline {
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+
+.cinema-feature-copy h2 {
+  margin: 0 0 8px;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.cinema-feature-copy p:not(.cinema-overline) {
+  font-size: 10px;
+  line-height: 1.5;
+}
+
+.cinema-feature-copy a {
+  display: inline-block;
+  margin-top: 8px;
+  color: #fff;
+  font-size: 10px;
+}
+
+.cinema-product-card {
+  position: relative;
+  display: block;
+  width: 112px;
+  height: 130px;
+  flex: 0 0 112px;
+  overflow: hidden;
+  border-radius: 13px;
+  background: #f4eee5;
+  box-shadow: 0 8px 25px rgba(0,0,0,.25);
+}
+
+.cinema-product-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.cinema-product-card > span {
+  position: absolute;
+  right: 7px;
+  top: 7px;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  color: #1d1915;
+  background: #fff;
+  border-radius: 50%;
+}
+
+.cinema-product-second {
+  width: 105px;
+  height: 110px;
+  flex-basis: 105px;
+}
+
+.cinema-bottom-note {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 8px;
+  letter-spacing: 1.3px;
+  color: rgba(255,255,255,.8);
+}
+
+@media (min-width: 1400px) {
+  .cinema-hero {
+    min-height: 700px;
+  }
+
+  .cinema-intro {
+    padding-top: 95px;
+  }
+}
+
+@media (max-width: 760px) {
+  .cinema-hero {
+    min-height: 700px;
+  }
+
+  .cinema-background {
+    background-position: 56% center;
+  }
+
+  .cinema-shade {
+    background:
+      linear-gradient(90deg, rgba(26,16,11,.68), rgba(26,16,11,.12)),
+      linear-gradient(0deg, rgba(26,16,11,.85), transparent 75%);
+  }
+
+  .cinema-nav {
+    min-height: 54px;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .cinema-logo {
+    font-size: 12px;
+  }
+
+  .cinema-logo span {
+    font-size: 8px;
+  }
+
+  .cinema-links {
+    gap: 0;
+  }
+
+  .cinema-links a {
+    padding: 8px;
+    font-size: 10px;
+  }
+
+  .cinema-menu {
+    font-size: 10px;
+  }
+
+  .cinema-intro {
+    padding: 68px 18px 280px;
+  }
+
+  .cinema-intro h1 {
+    font-size: clamp(48px, 10vw, 76px);
+    letter-spacing: -2px;
+  }
+
+  .cinema-description {
+    max-width: 270px;
+    font-size: 12px;
+  }
+
+  .cinema-side-note {
+    display: none;
+  }
+
+  .cinema-feature {
+    right: 12px;
+    bottom: 45px;
+    left: 12px;
+    max-width: none;
+    gap: 8px;
+    justify-content: flex-end;
+  }
+
+  .cinema-feature-copy {
+    width: auto;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .cinema-feature-copy h2 {
+    font-size: 21px;
+  }
+
+  .cinema-product-card {
+    width: 82px;
+    height: 100px;
+    flex-basis: 82px;
+  }
+
+  .cinema-product-second {
+    width: 72px;
+    height: 86px;
+    flex-basis: 72px;
+  }
+
+  .cinema-bottom-note {
+    left: 14px;
+    right: 14px;
+    font-size: 7px;
+    letter-spacing: .5px;
+  }
+}
+
+@media (max-width: 390px) {
+  .cinema-menu {
+    display: none;
+  }
+
+  .cinema-intro {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .cinema-intro h1 {
+    font-size: 45px;
+  }
+
+  .cinema-product-card {
+    width: 65px;
+    height: 82px;
+    flex-basis: 65px;
+  }
+
+  .cinema-product-second {
+    display: none;
+  }
+
+  .cinema-feature-copy h2 {
+    font-size: 18px;
+  }
+}
+
