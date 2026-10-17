@@ -1,889 +1,605 @@
 
-/* =========================================
-   LUMIÈRE SKIN — DEMO STORE SCRIPT
-   Demo checkout only. No real payment.
-========================================= */
-
 "use strict";
 
-const $ = (selector, root = document) => root.querySelector(selector);
-const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
+/* =========================================
+   GLOWVÉ — STOREFRONT DEMO
+   Works with index.html and product.html
+========================================= */
 
 const PRODUCTS = [
   {
-    id: 1, name: "BHA Liquid Exfoliant", category: "exfoliant",
-    price: 799, oldPrice: 999, rating: 4.8, tag: "BESTSELLER",
-    description: "A gentle exfoliant concept for a smoother-looking complexion.",
-    ingredients: "Illustrative formula: salicylic acid, soothing humectants.",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=85"
+    id: "glow-cleanser",
+    name: "Cloud Cleanser",
+    category: "Cleanser",
+    price: 399,
+    tag: "DAILY FAVOURITE",
+    description: "A gentle daily cleanser for a fresh, comfortable-feeling finish.",
+    details: "Start your routine with a gentle cleanse. Massage onto damp skin and rinse with lukewarm water. Choose products according to your skin's needs.",
+    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 2, name: "Dew Drop Serum", category: "serum",
-    price: 999, oldPrice: 1299, rating: 4.9, tag: "GLOW FAVOURITE",
-    description: "A lightweight hydration serum concept for an everyday glow.",
-    ingredients: "Illustrative formula: hyaluronic acid, glycerin.",
-    image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=85"
+    id: "glow-serum",
+    name: "Dew Drop Serum",
+    category: "Serum",
+    price: 599,
+    tag: "GLOW ESSENTIAL",
+    description: "A lightweight serum to make your skincare ritual feel special.",
+    details: "Apply a small amount according to the product's instructions. Patch test new products first and introduce active ingredients gradually.",
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 3, name: "Cloud Cream Moisturiser", category: "moisturiser",
-    price: 849, oldPrice: 1099, rating: 4.7, tag: "DAILY ESSENTIAL",
-    description: "A comfort-first moisturiser concept for your daily routine.",
-    ingredients: "Illustrative formula: emollients, glycerin.",
-    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=800&q=85"
+    id: "glow-moisturiser",
+    name: "Daily Cloud Cream",
+    category: "Moisturiser",
+    price: 499,
+    tag: "EVERYDAY CARE",
+    description: "A daily moisturiser to complete your simple skincare routine.",
+    details: "Apply after cleansing and any serums in your routine. Use a moisturiser suited to your skin type and follow with sunscreen during the day.",
+    image: "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 4, name: "Evening Renewal Oil", category: "treatment",
-    price: 1199, oldPrice: 1499, rating: 4.6, tag: "NIGHT RITUAL",
-    description: "A nourishing facial oil concept for an evening skincare ritual.",
-    ingredients: "Illustrative formula: plant oils and emollients.",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=85"
+    id: "glow-glow-kit",
+    name: "The Glow Ritual Kit",
+    category: "Set",
+    price: 999,
+    tag: "THE GLOW EDIT",
+    description: "A curated skincare set for a thoughtful everyday ritual.",
+    details: "Build a consistent routine with products suitable for your skin. Review each product's ingredients and directions before use.",
+    image: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 5, name: "Snail Essence", category: "essence",
-    price: 899, oldPrice: 1099, rating: 4.7, tag: "HYDRATION",
-    description: "A hydrating essence concept to layer into your routine.",
-    ingredients: "Illustrative formula: humectants and skin-conditioning ingredients.",
-    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=800&q=85"
+    id: "glow-toner",
+    name: "Petal Balance Toner",
+    category: "Toner",
+    price: 449,
+    tag: "SOFT & SIMPLE",
+    description: "A refreshing step to add to your personal skincare routine.",
+    details: "Apply as directed on the product label. Avoid using products that cause irritation and stop use if a reaction occurs.",
+    image: "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 6, name: "Daily Glow Toner", category: "toner",
-    price: 699, oldPrice: 899, rating: 4.5, tag: "FRESH START",
-    description: "A refreshing toner concept for a simple skincare routine.",
-    ingredients: "Illustrative formula: water-based skin-conditioning ingredients.",
-    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?auto=format&fit=crop&w=800&q=85"
+    id: "glow-night",
+    name: "Night Bloom Cream",
+    category: "Moisturiser",
+    price: 649,
+    tag: "EVENING RITUAL",
+    description: "A comforting final step for your evening skincare routine.",
+    details: "Use at night as directed. Introduce new skincare products one at a time to help identify any irritation.",
+    image: "https://images.unsplash.com/photo-1570194065650-d99fb4bedf0a?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 7, name: "Soft Foam Cleanser", category: "cleanser",
-    price: 599, oldPrice: 749, rating: 4.6, tag: "GENTLE CLEANSE",
-    description: "A gentle cleanser concept for the first step of your routine.",
-    ingredients: "Illustrative formula: mild cleansing agents and humectants.",
-    image: "https://images.unsplash.com/photo-1556229010-6c3f2c9ca5f8?auto=format&fit=crop&w=800&q=85"
+    id: "glow-eye",
+    name: "Soft Focus Eye Cream",
+    category: "Moisturiser",
+    price: 549,
+    tag: "LITTLE LUXURY",
+    description: "A considered extra for a gentle, feel-good skincare ritual.",
+    details: "Use only as directed, avoiding direct contact with the eyes. Patch test before adding a new product to your routine.",
+    image: "https://images.unsplash.com/photo-1601049541289-9b1b7bbbfe19?auto=format&fit=crop&w=900&q=85"
   },
   {
-    id: 8, name: "Daily Veil Sunscreen", category: "sunscreen",
-    price: 749, oldPrice: 949, rating: 4.8, tag: "DAYTIME CARE",
-    description: "A sunscreen product concept. Check verified SPF and local labelling before real-world use.",
-    ingredients: "Illustrative only. Actual UV filters and SPF are not verified.",
-    image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=800&q=85"
+    id: "glow-mask",
+    name: "Sunday Reset Mask",
+    category: "Mask",
+    price: 699,
+    tag: "SELF-CARE PICK",
+    description: "Make a little room for a relaxing skincare moment.",
+    details: "Follow the usage directions and recommended contact time on the product label. Do not leave a mask on longer than directed.",
+    image: "https://images.unsplash.com/photo-1596755389378-c31d21fd1273?auto=format&fit=crop&w=900&q=85"
   }
 ];
 
-const STORAGE = {
-  cart: "lumiere_demo_cart_v3",
-  wishlist: "lumiere_demo_wishlist_v3",
-  orders: "lumiere_demo_orders_v3",
-  user: "lumiere_demo_user_v3",
-  reviews: "lumiere_demo_reviews_v3"
+const KEYS = {
+  cart: "glowve_demo_cart_v1",
+  wishlist: "glowve_demo_wishlist_v1"
 };
 
-function readStore(key, fallback) {
+const state = {
+  filter: "All",
+  search: "",
+  cart: readStorage(KEYS.cart, []),
+  wishlist: readStorage(KEYS.wishlist, [])
+};
+
+function readStorage(key, fallback) {
   try {
-    const value = localStorage.getItem(key);
-    return value ? JSON.parse(value) : fallback;
-  } catch {
+    const value = JSON.parse(localStorage.getItem(key));
+    return Array.isArray(value) ? value : fallback;
+  } catch (error) {
     return fallback;
   }
 }
 
-function saveStore(key, value) {
+function saveStorage() {
   try {
-    localStorage.setItem(key, JSON.stringify(value));
-  } catch {
+    localStorage.setItem(KEYS.cart, JSON.stringify(state.cart));
+    localStorage.setItem(KEYS.wishlist, JSON.stringify(state.wishlist));
+  } catch (error) {
     showToast("Browser storage is unavailable.");
   }
 }
 
-let cart = readStore(STORAGE.cart, {});
-let wishlist = readStore(STORAGE.wishlist, []);
-let orders = readStore(STORAGE.orders, []);
-let demoUser = readStore(STORAGE.user, null);
-let appliedCoupon = false;
-let activeCategory = "all";
-let checkoutStep = 1;
-let checkoutData = {};
-let toastTimer;
-
-const money = amount => "₹" + Math.round(amount).toLocaleString("en-IN");
-const safe = value => String(value ?? "").replace(/[&<>"']/g, char => ({
-  "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
-})[char]);
-
-function showToast(message) {
-  const toast = $("#toast");
-  if (!toast) return;
-  toast.textContent = message;
-  toast.classList.add("show");
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove("show"), 2600);
+function money(value) {
+  return new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    maximumFractionDigits: 0
+  }).format(value);
 }
 
-function getProduct(id) {
-  return PRODUCTS.find(product => product.id === Number(id));
-}
-
-function getCartLines() {
-  return Object.entries(cart)
-    .map(([id, qty]) => ({ product: getProduct(id), qty: Number(qty) }))
-    .filter(line => line.product && line.qty > 0);
-}
-
-function getSubtotal() {
-  return getCartLines().reduce((sum, line) => sum + line.product.price * line.qty, 0);
-}
-
-function getDiscount() {
-  return appliedCoupon ? Math.round(getSubtotal() * 0.10) : 0;
-}
-
-function getShipping() {
-  const subtotal = getSubtotal() - getDiscount();
-  return subtotal === 0 || subtotal >= 1999 ? 0 : 99;
-}
-
-function getTotal() {
-  return Math.max(0, getSubtotal() - getDiscount() + getShipping());
-}
-
-function cartCount() {
-  return getCartLines().reduce((sum, line) => sum + line.qty, 0);
-}
-
-function renderProducts() {
-  const grid = $("#productGrid");
-  if (!grid) return;
-
-  const query = ($("#productSearch")?.value || "").trim().toLowerCase();
-
-  const matches = PRODUCTS.filter(product => {
-    const categoryMatch = activeCategory === "all" || product.category === activeCategory;
-    const queryMatch = `${product.name} ${product.category} ${product.description}`
-      .toLowerCase().includes(query);
-    const wishlistOnly = document.body.dataset.wishlistOnly === "true";
-    return categoryMatch && queryMatch && (!wishlistOnly || wishlist.includes(product.id));
-  });
-
-  if (!matches.length) {
-    grid.innerHTML = '<p class="empty">No products found. Try another search.</p>';
-    return;
-  }
-
-  grid.innerHTML = matches.map(product => `
-    <article class="product-card">
-      <a class="product-photo" href="product.html?id=${product.id}">
-        <img src="${product.image}" alt="${safe(product.name)}" loading="lazy">
-        <span class="product-tag">${safe(product.tag)}</span>
-      </a>
-      <button class="heart ${wishlist.includes(product.id) ? "selected" : ""}"
-        data-wishlist="${product.id}" aria-label="Toggle wishlist">${wishlist.includes(product.id) ? "♥" : "♡"}</button>
-      <div class="product-info">
-        <p class="product-category">${safe(product.category)}</p>
-        <h3><a href="product.html?id=${product.id}">${safe(product.name)}</a></h3>
-        <p class="rating">★★★★★ <span>${product.rating} · demo rating</span></p>
-        <p class="price">${money(product.price)} <del>${money(product.oldPrice)}</del></p>
-        <div class="product-actions">
-          <a class="text-link" href="product.html?id=${product.id}">Details ↗</a>
-          <button class="btn small-btn" data-add="${product.id}">Add to bag</button>
-        </div>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderWishlistCount() {
-  const count = $("#wishlistCount");
-  if (count) count.textContent = wishlist.length;
-}
-
-function toggleWishlist(id) {
-  id = Number(id);
-  wishlist = wishlist.includes(id)
-    ? wishlist.filter(item => item !== id)
-    : [...wishlist, id];
-  saveStore(STORAGE.wishlist, wishlist);
-  renderWishlistCount();
-  renderProducts();
-  renderProductDetail();
-  showToast(wishlist.includes(id) ? "Added to wishlist ♡" : "Removed from wishlist");
-}
-
-function addToCart(id, qty = 1) {
-  id = Number(id);
-  if (!getProduct(id)) return;
-  cart[id] = Math.min(99, (Number(cart[id]) || 0) + qty);
-  saveStore(STORAGE.cart, cart);
-  renderCart();
-  showToast("Added to your bag ✨");
-}
-
-function changeCartQty(id, amount) {
-  id = Number(id);
-  const next = (Number(cart[id]) || 0) + amount;
-  if (next <= 0) delete cart[id];
-  else cart[id] = Math.min(99, next);
-  saveStore(STORAGE.cart, cart);
-  renderCart();
-}
-
-function renderCart() {
-  const count = cartCount();
-  ["headerCartCount", "drawerCartCount"].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = count;
-  });
-
-  const items = $("#cartItems");
-  if (items) {
-    const lines = getCartLines();
-    items.innerHTML = lines.length ? lines.map(({ product, qty }) => `
-      <article class="cart-line">
-        <img src="${product.image}" alt="${safe(product.name)}">
-        <div class="cart-line-info">
-          <strong>${safe(product.name)}</strong>
-          <span>${money(product.price)}</span>
-          <div class="qty-controls">
-            <button data-qty="${product.id}" data-delta="-1" aria-label="Decrease quantity">−</button>
-            <span>${qty}</span>
-            <button data-qty="${product.id}" data-delta="1" aria-label="Increase quantity">+</button>
-            <button class="remove" data-remove="${product.id}">Remove</button>
-          </div>
-        </div>
-      </article>
-    `).join("") : '<p class="empty">Your bag is waiting for a little glow.</p>';
-  }
-
-  const subtotal = getSubtotal();
-  const discount = getDiscount();
-  const shipping = getShipping();
-  const total = getTotal();
-
-  if ($("#cartSubtotal")) $("#cartSubtotal").textContent = money(subtotal);
-  if ($("#cartDiscount")) $("#cartDiscount").textContent = "−" + money(discount);
-  if ($("#cartShipping")) $("#cartShipping").textContent = shipping === 0 && subtotal > 0 ? "FREE" : money(shipping);
-  if ($("#cartTotal")) $("#cartTotal").textContent = money(total);
-
-  const remaining = Math.max(0, 1999 - (subtotal - discount));
-  if ($("#shippingMessage")) {
-    $("#shippingMessage").textContent = subtotal === 0
-      ? "Add products to get free shipping."
-      : remaining === 0 ? "You've unlocked free shipping ✨" : `Add ${money(remaining)} more for free shipping.`;
-  }
-  if ($("#shippingProgress")) {
-    $("#shippingProgress").style.width = `${Math.min(100, ((subtotal - discount) / 1999) * 100)}%`;
-  }
-  if ($("#checkoutButton")) $("#checkoutButton").disabled = count === 0;
-}
-
-function openCart() {
-  $("#cartDrawer")?.classList.add("open");
-  $("#cartOverlay")?.classList.add("show");
-  $("#cartDrawer")?.setAttribute("aria-hidden", "false");
-}
-
-function closeCart() {
-  $("#cartDrawer")?.classList.remove("open");
-  $("#cartOverlay")?.classList.remove("show");
-  $("#cartDrawer")?.setAttribute("aria-hidden", "true");
-}
-
-function renderProductDetail() {
-  const name = $("#detailName");
-  if (!name) return;
-
-  const id = Number(new URLSearchParams(location.search).get("id")) || 1;
-  const product = getProduct(id) || PRODUCTS[0];
-  const image = $("#detailImage");
-  const oldPrice = $("#detailOldPrice");
-  const price = $("#detailPrice");
-
-  name.textContent = product.name;
-  if (image) {
-    image.src = product.image;
-    image.alt = product.name;
-  }
-  if (price) price.textContent = money(product.price);
-  if (oldPrice) oldPrice.textContent = money(product.oldPrice);
-  if ($("#detailCategory")) $("#detailCategory").textContent = product.category;
-  if ($("#detailDescription")) $("#detailDescription").textContent = product.description;
-  if ($("#detailIngredients")) $("#detailIngredients").textContent = product.ingredients;
-  if ($("#detailRating")) $("#detailRating").textContent = `★★★★★ ${product.rating} (demo rating)`;
-
-  const heart = $("#detailWishlist");
-  if (heart) {
-    heart.textContent = wishlist.includes(product.id) ? "♥ Saved" : "♡ Wishlist";
-    heart.dataset.wishlist = product.id;
-  }
-  const addButton = $("#detailAdd");
-  if (addButton) addButton.dataset.add = product.id;
-  const qty = $("#detailQty");
-  if (qty) qty.value = Math.max(1, Number(qty.value) || 1);
-
-  const title = document.querySelector("title");
-  if (title) title.textContent = `${product.name} | LUMIÈRE SKIN`;
-}
-
-function openCheckout() {
-  if (!cartCount()) {
-    showToast("Add a product to your bag first.");
-    return;
-  }
-  closeCart();
-  checkoutStep = 1;
-  checkoutData = {};
-  $("#checkoutBackdrop").hidden = false;
-  document.body.classList.add("modal-open");
-  renderCheckoutStep();
-}
-
-function closeCheckout() {
-  $("#checkoutBackdrop").hidden = true;
-  document.body.classList.remove("modal-open");
-}
-
-function updateCheckoutProgress() {
-  $$("[data-step-dot]").forEach(dot => {
-    const step = Number(dot.dataset.stepDot);
-    dot.classList.toggle("active", step <= checkoutStep);
-    dot.classList.toggle("complete", step < checkoutStep);
-  });
-}
-
-function renderCheckoutStep() {
-  const title = $("#checkoutTitle");
-  const subtitle = $("#checkoutSubtitle");
-  const content = $("#checkoutStepContent");
-  if (!content) return;
-
-  updateCheckoutProgress();
-
-  if (checkoutStep === 1) {
-    title.textContent = demoUser ? `Hello, ${demoUser.name}!` : "Welcome to your glow";
-    subtitle.textContent = "Sign in or create a demo account to continue.";
-    content.innerHTML = `
-      <form id="demoLoginForm" class="checkout-form">
-        <label>Your name<input id="checkoutName" maxlength="60" autocomplete="name" required value="${safe(demoUser?.name || "")}"></label>
-        <label>Email address<input id="checkoutEmail" type="email" maxlength="120" autocomplete="email" required value="${safe(demoUser?.email || "")}"></label>
-        <label>Demo password<input id="checkoutPassword" type="password" minlength="4" maxlength="60" autocomplete="off" required placeholder="Use a made-up demo password"></label>
-        <button class="btn wide" type="submit">${demoUser ? "Continue to address" : "Sign in / Create demo account"}</button>
-        <p class="note">This is a simulated login. Never enter your real password.</p>
-      </form>`;
-    return;
-  }
-
-  if (checkoutStep === 2) {
-    title.textContent = "Where should we deliver?";
-    subtitle.textContent = "Enter a fictional/demo address for your test order.";
-    content.innerHTML = `
-      <form id="demoAddressForm" class="checkout-form">
-        <label>Full name<input id="addressName" maxlength="80" required value="${safe(checkoutData.name || demoUser?.name || "")}"></label>
-        <label>Mobile number<input id="addressPhone" inputmode="numeric" maxlength="10" pattern="[0-9]{10}" placeholder="10-digit demo number" required value="${safe(checkoutData.phone || "")}"></label>
-        <label>House / street / area<textarea id="addressLine" maxlength="220" rows="2" required>${safe(checkoutData.address || "")}</textarea></label>
-        <div class="form-row">
-          <label>City<input id="addressCity" maxlength="60" required value="${safe(checkoutData.city || "")}"></label>
-          <label>State<input id="addressState" maxlength="60" required value="${safe(checkoutData.state || "")}"></label>
-        </div>
-        <label>PIN code<input id="addressPin" inputmode="numeric" maxlength="6" pattern="[0-9]{6}" required value="${safe(checkoutData.pin || "")}"></label>
-        <div class="form-row">
-          <button type="button" class="btn secondary" id="backToLogin">Back</button>
-          <button class="btn" type="submit">Continue to payment</button>
-        </div>
-      </form>`;
-    return;
-  }
-
-  if (checkoutStep === 3) {
-    title.textContent = "Review your order";
-    subtitle.textContent = "Choose a simulated payment method and place your test order.";
-    const lines = getCartLines();
-    content.innerHTML = `
-      <div class="checkout-summary">
-        ${lines.map(({product, qty}) => `<p>${safe(product.name)} × ${qty}<b>${money(product.price * qty)}</b></p>`).join("")}
-        <hr>
-        <p>Subtotal <b>${money(getSubtotal())}</b></p>
-        <p>Discount <b>−${money(getDiscount())}</b></p>
-        <p>Shipping <b>${getShipping() === 0 ? "FREE" : money(getShipping())}</b></p>
-        <p class="grand">Total <b>${money(getTotal())}</b></p>
-      </div>
-      <div class="delivery-preview">
-        <strong>Delivering to</strong>
-        <p>${safe(checkoutData.name)} · ${safe(checkoutData.phone)}</p>
-        <p>${safe(checkoutData.address)}, ${safe(checkoutData.city)}, ${safe(checkoutData.state)} — ${safe(checkoutData.pin)}</p>
-        <button type="button" class="text-link" id="editAddress">Edit address</button>
-      </div>
-      <form id="demoPaymentForm" class="checkout-form">
-        <h3>Demo payment method</h3>
-        <label class="payment-option"><input type="radio" name="demoPayment" value="Demo UPI" checked> UPI simulation <small>No UPI app opens</small></label>
-        <label class="payment-option"><input type="radio" name="demoPayment" value="Demo card"> Card simulation <small>Do not enter card details</small></label>
-        <label class="payment-option"><input type="radio" name="demoPayment" value="Demo cash on delivery"> Cash on delivery demo <small>No real delivery is arranged</small></label>
-        <div class="form-row">
-          <button type="button" class="btn secondary" id="backToAddress">Back</button>
-          <button class="btn" type="submit">Place demo order · ${money(getTotal())}</button>
-        </div>
-      </form>`;
-  }
-}
-
-function showOrderConfirmation(order) {
-  const content = $("#checkoutStepContent");
-  $("#checkoutTitle").textContent = "Your demo order is placed ✨";
-  $("#checkoutSubtitle").textContent = "Success! This is a simulated order only.";
-  $("#checkoutBackdrop")?.querySelectorAll("[data-step-dot]").forEach(dot => dot.classList.add("active"));
-  content.innerHTML = `
-    <div class="confirmation">
-      <div class="success-mark">✓</div>
-      <p class="eyebrow">ORDER CONFIRMED · DEMO ONLY</p>
-      <h3>${safe(order.id)}</h3>
-      <p>Order total: <strong>${money(order.total)}</strong></p>
-      <p>Payment method: ${safe(order.payment)}</p>
-      <p>Delivery address: ${safe(order.address.address)}, ${safe(order.address.city)}, ${safe(order.address.state)} ${safe(order.address.pin)}</p>
-      <p class="note">No real payment was collected and no parcel will be sent.</p>
-      <button class="btn wide" id="finishDemoOrder">Continue shopping</button>
-    </div>`;
-  renderOrderHistory();
-}
-
-function placeDemoOrder(payment) {
-  const order = {
-    id: "LS-DEMO-" + Date.now().toString().slice(-8),
-    createdAt: new Date().toLocaleString("en-IN"),
-    items: getCartLines().map(({product, qty}) => ({
-      id: product.id, name: product.name, price: product.price, qty
-    })),
-    subtotal: getSubtotal(),
-    discount: getDiscount(),
-    shipping: getShipping(),
-    total: getTotal(),
-    payment,
-    address: {...checkoutData}
-  };
-
-  orders.unshift(order);
-  saveStore(STORAGE.orders, orders);
-  cart = {};
-  appliedCoupon = false;
-  saveStore(STORAGE.cart, cart);
-  renderCart();
-  showOrderConfirmation(order);
-}
-
-function renderOrderHistory() {
-  const target = $("#orderHistory");
-  if (!target) return;
-  if (!orders.length) {
-    target.innerHTML = '<p class="empty">No demo orders yet. Your placed orders will appear here.</p>';
-    return;
-  }
-  target.innerHTML = orders.map(order => `
-    <article class="order-card">
-      <div><span class="eyebrow">DEMO ORDER</span><h3>${safe(order.id)}</h3><small>${safe(order.createdAt)}</small></div>
-      <div><strong>${money(order.total)}</strong><p>${order.items.length} product line(s)</p><small>${safe(order.payment)}</small></div>
-      <details><summary>View details</summary>
-        <p>${order.items.map(item => `${safe(item.name)} × ${item.qty}`).join("<br>")}</p>
-        <p>${safe(order.address.address)}, ${safe(order.address.city)}, ${safe(order.address.state)} — ${safe(order.address.pin)}</p>
-      </details>
-    </article>
-  `).join("");
-}
-
-/* Event delegation for product cards, wishlist and cart quantity buttons */
-document.addEventListener("click", event => {
-  const add = event.target.closest("[data-add]");
-  if (add) {
-    const id = Number(add.dataset.add);
-    const qtyInput = $("#detailQty");
-    const qty = add.id === "detailAdd" ? Math.max(1, Number(qtyInput?.value) || 1) : 1;
-    addToCart(id, qty);
-  }
-
-  const wish = event.target.closest("[data-wishlist]");
-  if (wish) toggleWishlist(Number(wish.dataset.wishlist));
-
-  const quantity = event.target.closest("[data-qty]");
-  if (quantity) changeCartQty(Number(quantity.dataset.qty), Number(quantity.dataset.delta));
-
-  const remove = event.target.closest("[data-remove]");
-  if (remove) {
-    delete cart[remove.dataset.remove];
-    saveStore(STORAGE.cart, cart);
-    renderCart();
-  }
-});
-
-$("#productSearch")?.addEventListener("input", renderProducts);
-
-$("#categoryFilters")?.addEventListener("click", event => {
-  const button = event.target.closest("[data-category]");
-  if (!button) return;
-  activeCategory = button.dataset.category;
-  $$("#categoryFilters [data-category]").forEach(item => item.classList.toggle("active", item === button));
-  renderProducts();
-});
-
-$("#wishlistToggle")?.addEventListener("click", () => {
-  const onlyWishlist = document.body.dataset.wishlistOnly === "true";
-  document.body.dataset.wishlistOnly = String(!onlyWishlist);
-  $("#wishlistToggle").classList.toggle("active", !onlyWishlist);
-  $("#wishlistToggle").setAttribute("aria-label", !onlyWishlist ? "Showing wishlist products" : "Show wishlist");
-  $("#shop")?.scrollIntoView({behavior: "smooth"});
-  renderProducts();
-});
-
-$("#cartOpen")?.addEventListener("click", openCart);
-$("#cartClose")?.addEventListener("click", closeCart);
-$("#cartOverlay")?.addEventListener("click", closeCart);
-$("#checkoutButton")?.addEventListener("click", openCheckout);
-
-$("#applyCoupon")?.addEventListener("click", () => {
-  const code = ($("#couponInput")?.value || "").trim().toUpperCase();
-  if (code === "GLOW10") {
-    appliedCoupon = true;
-    $("#couponMessage").textContent = "GLOW10 applied: 10% off ✨";
-  } else {
-    appliedCoupon = false;
-    $("#couponMessage").textContent = "Invalid code. Try GLOW10.";
-  }
-  renderCart();
-});
-
-$("#checkoutClose")?.addEventListener("click", closeCheckout);
-$("#checkoutBackdrop")?.addEventListener("click", event => {
-  if (event.target.id === "checkoutBackdrop") closeCheckout();
-});
-
-$("#checkoutStepContent")?.addEventListener("submit", event => {
-  event.preventDefault();
-
-  if (event.target.id === "demoLoginForm") {
-    const name = $("#checkoutName").value.trim();
-    const email = $("#checkoutEmail").value.trim();
-    const password = $("#checkoutPassword").value;
-    if (name.length < 2 || !email || password.length < 4) {
-      showToast("Enter the requested demo details.");
-      return;
-    }
-    // Password is deliberately NOT stored.
-    demoUser = {name, email};
-    saveStore(STORAGE.user, demoUser);
-    checkoutData.name = name;
-    checkoutData.email = email;
-    checkoutStep = 2;
-    renderCheckoutStep();
-  }
-
-  if (event.target.id === "demoAddressForm") {
-    checkoutData = {
-      ...checkoutData,
-      name: $("#addressName").value.trim(),
-      phone: $("#addressPhone").value.trim(),
-      address: $("#addressLine").value.trim(),
-      city: $("#addressCity").value.trim(),
-      state: $("#addressState").value.trim(),
-      pin: $("#addressPin").value.trim()
-    };
-    checkoutStep = 3;
-    renderCheckoutStep();
-  }
-
-  if (event.target.id === "demoPaymentForm") {
-    const method = $('input[name="demoPayment"]:checked')?.value || "Demo UPI";
-    placeDemoOrder(method);
-  }
-});
-
-$("#checkoutStepContent")?.addEventListener("click", event => {
-  if (event.target.id === "backToLogin") {
-    checkoutStep = 1;
-    renderCheckoutStep();
-  }
-  if (event.target.id === "backToAddress" || event.target.id === "editAddress") {
-    checkoutStep = 2;
-    renderCheckoutStep();
-  }
-  if (event.target.id === "finishDemoOrder") {
-    closeCheckout();
-    $("#orders")?.scrollIntoView({behavior: "smooth"});
-    showToast("Thanks for trying the demo!");
-  }
-});
-
-$("#loginOpen")?.addEventListener("click", () => {
-  if (cartCount()) openCheckout();
-  else {
-    checkoutStep = 1;
-    checkoutData = {};
-    $("#checkoutBackdrop").hidden = false;
-    document.body.classList.add("modal-open");
-    renderCheckoutStep();
-  }
-});
-
-$("#skinQuizSubmit")?.addEventListener("click", () => {
-  const type = $('input[name="skinType"]:checked')?.value;
-  const result = $("#skinQuizResult");
-  if (!type || !result) {
-    showToast("Please choose a skin type first.");
-    return;
-  }
-  const suggestions = {
-    oily: "Explore Soft Foam Cleanser and the BHA Liquid Exfoliant concept. Introduce exfoliants slowly.",
-    dry: "Explore Cloud Cream Moisturiser and Dew Drop Serum for a hydration-focused routine.",
-    combination: "Try a simple cleanser and lightweight moisturiser, adjusting products by area.",
-    sensitive: "Keep the routine simple and fragrance-aware. Patch-test products and avoid introducing several actives together."
-  };
-  result.hidden = false;
-  result.innerHTML = `<strong>Your routine idea</strong><p>${safe(suggestions[type])}</p><a class="text-link" href="#shop">Explore products ↗</a>`;
-});
-
-$("#reviewForm")?.addEventListener("submit", event => {
-  event.preventDefault();
-  const review = {
-    name: $("#reviewName").value.trim(),
-    rating: Number($("#reviewRating").value),
-    text: $("#reviewText").value.trim(),
-    demo: true
-  };
-  if (!review.name || !review.text) return;
-  const reviews = readStore(STORAGE.reviews, []);
-  reviews.unshift(review);
-  saveStore(STORAGE.reviews, reviews.slice(0, 20));
-  renderUserReviews();
-  event.target.reset();
-  showToast("Demo review added in this browser.");
-});
-
-function renderUserReviews() {
-  const target = $("#userReviews");
-  if (!target) return;
-  const reviews = readStore(STORAGE.reviews, []);
-  target.innerHTML = reviews.map(review => `
-    <article class="user-review">
-      <b>${"★".repeat(Math.max(1, Math.min(5, review.rating)))}</b>
-      <strong>${safe(review.name)}</strong>
-      <p>${safe(review.text)}</p>
-      <small>Demo review · browser only</small>
-    </article>
-  `).join("");
-}
-
-$("#newsletterForm")?.addEventListener("submit", event => {
-  event.preventDefault();
-  showToast("Thanks! This demo form doesn't send or store emails.");
-  event.target.reset();
-});
-
-/* Demo help chat */
-function addChatMessage(message, type) {
-  const box = $("#chatMessages");
-  if (!box) return;
-  const p = document.createElement("p");
-  p.className = `bubble ${type}`;
-  p.textContent = message;
-  box.appendChild(p);
-  box.scrollTop = box.scrollHeight;
-}
-
-function getChatReply(message) {
-  const text = message.toLowerCase();
-  if (text.includes("shipping") || text.includes("delivery")) return "Demo shipping is ₹99 below ₹1,999 and free above that threshold. No parcel is actually delivered.";
-  if (text.includes("coupon") || text.includes("discount")) return "Try the demo coupon GLOW10 for 10% off your sample cart.";
-  if (text.includes("payment") || text.includes("upi") || text.includes("card")) return "Checkout payment choices are simulations only. No payment app opens and no money is collected.";
-  if (text.includes("order")) return "Open My orders to view sample orders placed in this browser.";
-  if (text.includes("product") || text.includes("serum")) return "Browse the Shop section to explore our illustrative demo product catalogue.";
-  return "I'm a simple demo assistant. Try asking about shipping, coupon, products, payment or orders.";
-}
-
-$("#chatOpen")?.addEventListener("click", () => { $("#chatBackdrop").hidden = false; });
-$("#chatClose")?.addEventListener("click", () => { $("#chatBackdrop").hidden = true; });
-$("#chatBackdrop")?.addEventListener("click", event => {
-  if (event.target.id === "chatBackdrop") $("#chatBackdrop").hidden = true;
-});
-$("#chatForm")?.addEventListener("submit", event => {
-  event.preventDefault();
-  const input = $("#chatInput");
-  const message = input.value.trim();
-  if (!message) return;
-  addChatMessage(message, "user");
-  input.value = "";
-  addChatMessage(getChatReply(message), "bot");
-});
-$$("[data-chat]").forEach(button => {
-  button.addEventListener("click", () => addChatMessage(getChatReply(button.dataset.chat), "bot"));
-});
-
-/* Mobile navigation and reveal animation */
-$("#menuToggle")?.addEventListener("click", () => $("#nav")?.classList.toggle("nav-open"));
-$$('#nav a').forEach(link => link.addEventListener("click", () => $("#nav")?.classList.remove("nav-open")));
-
-if ("IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("revealed");
-        observer.unobserve(entry.target);
-      }
-    });
-  }, {threshold: 0.12});
-  $$(".reveal, .product-card, .story, .reviews article").forEach(el => observer.observe(el));
-} else {
-  $$(".reveal, .product-card, .story, .reviews article").forEach(el => el.classList.add("revealed"));
-}
-
-if ($("#currentYear")) $("#currentYear").textContent = new Date().getFullYear();
-
-renderProducts();
-renderCart();
-renderWishlistCount();
-renderProductDetail();
-renderOrderHistory();
-renderUserReviews();
-
-/* ===== LOCAL DEMO ORDER TRACKING ===== */
-function initOrderTracking() {
-  const form = document.getElementById("trackingForm");
-  const input = document.getElementById("trackingOrderId");
-  const result = document.getElementById("trackingResult");
-
-  if (!form || !input || !result) return;
-
-  const escapeHTML = value =>
-    String(value ?? "").replace(/[&<>"']/g, ch => ({
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, function (character) {
+    return {
       "&": "&amp;",
       "<": "&lt;",
       ">": "&gt;",
       '"': "&quot;",
       "'": "&#39;"
-    })[ch]);
+    }[character];
+  });
+}
 
-  function getOrders() {
-    try {
-      const orders = JSON.parse(
-        localStorage.getItem("lumiereDemoOrders") || "[]"
-      );
-      return Array.isArray(orders) ? orders : [];
-    } catch {
-      return [];
-    }
+function getProduct(id) {
+  return PRODUCTS.find(function (product) {
+    return product.id === id;
+  });
+}
+
+function productLink(product) {
+  return "product.html?id=" + encodeURIComponent(product.id);
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (!toast) return;
+
+  toast.textContent = message;
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+  showToast.timer = setTimeout(function () {
+    toast.classList.remove("show");
+  }, 2600);
+}
+
+function getCartQuantity() {
+  return state.cart.reduce(function (total, item) {
+    return total + item.quantity;
+  }, 0);
+}
+
+function getCartTotal() {
+  return state.cart.reduce(function (total, item) {
+    const product = getProduct(item.id);
+    return total + (product ? product.price * item.quantity : 0);
+  }, 0);
+}
+
+function renderProducts() {
+  const grid = document.getElementById("productGrid");
+  if (!grid) return;
+
+  const filtered = PRODUCTS.filter(function (product) {
+    const matchesCategory =
+      state.filter === "All" || product.category === state.filter;
+
+    const searchable =
+      (product.name + " " + product.category + " " + product.description)
+        .toLowerCase();
+
+    return matchesCategory && searchable.includes(state.search.toLowerCase());
+  });
+
+  const count = document.getElementById("resultCount");
+  const empty = document.getElementById("emptyState");
+
+  if (count) count.textContent = filtered.length + " lovely finds";
+  if (empty) empty.hidden = filtered.length !== 0;
+
+  grid.innerHTML = filtered.map(function (product) {
+    const saved = state.wishlist.includes(product.id);
+
+    return `
+      <article class="product-card">
+        <div class="product-image-wrap">
+          <a href="${productLink(product)}" aria-label="View ${escapeHTML(product.name)}">
+            <img src="${escapeHTML(product.image)}"
+                 alt="${escapeHTML(product.name)}"
+                 loading="lazy">
+          </a>
+          <span class="product-tag">${escapeHTML(product.tag)}</span>
+          <button class="wish-button ${saved ? "saved" : ""}"
+            data-action="wishlist"
+            data-id="${product.id}"
+            aria-label="${saved ? "Remove from" : "Add to"} wishlist">
+            ${saved ? "♥" : "♡"}
+          </button>
+        </div>
+        <div class="product-info">
+          <span class="product-category">${escapeHTML(product.category)}</span>
+          <h3><a href="${productLink(product)}">${escapeHTML(product.name)}</a></h3>
+          <p>${escapeHTML(product.description)}</p>
+          <div class="product-bottom">
+            <span class="product-price">${money(product.price)}</span>
+            <button class="add-button" data-action="add" data-id="${product.id}">
+              Add to bag +
+            </button>
+          </div>
+          <a class="details-link" href="${productLink(product)}">View product details ↗</a>
+        </div>
+      </article>`;
+  }).join("");
+}
+
+function renderCounts() {
+  const cartCount = document.getElementById("cartCount");
+  const wishlistCount = document.getElementById("wishlistCount");
+
+  if (cartCount) cartCount.textContent = getCartQuantity();
+  if (wishlistCount) wishlistCount.textContent = state.wishlist.length;
+}
+
+function addToCart(id) {
+  const product = getProduct(id);
+  if (!product) return;
+
+  const existing = state.cart.find(function (item) {
+    return item.id === id;
+  });
+
+  if (existing) {
+    existing.quantity += 1;
+  } else {
+    state.cart.push({ id: id, quantity: 1 });
   }
 
-  function showOrder(order) {
-    const steps = [
-      "Demo order confirmed",
-      "Processing",
-      "Packed",
-      "Shipped",
-      "Delivered"
-    ];
+  saveStorage();
+  renderCart();
+  renderCounts();
+  showToast(product.name + " added to your bag.");
+}
 
-    const savedStatus = order.status || "Demo order confirmed";
-    const currentStep = Math.max(0, steps.indexOf(savedStatus));
+function changeQuantity(id, difference) {
+  const item = state.cart.find(function (entry) {
+    return entry.id === id;
+  });
 
-    const safeItems = Array.isArray(order.items) ? order.items : [];
-    const customer = order.customer || {};
-    const address = order.address || {};
+  if (!item) return;
 
-    const addressText = [
-      address.street,
-      address.city,
-      address.state,
-      address.pin
-    ].filter(Boolean).join(", ");
+  item.quantity += difference;
 
-    const itemHTML = safeItems.map(item => `
-      <div class="tracking-item-row">
-        <span>${escapeHTML(item.name)} × ${Number(item.quantity) || 1}</span>
-        <strong>₹${(
-          (Number(item.price) || 0) *
-          (Number(item.quantity) || 1)
-        ).toLocaleString("en-IN")}</strong>
-      </div>
-    `).join("");
-
-    result.innerHTML = `
-      <p class="eyebrow">LUMIÈRE SKIN · DEMO TRACKING</p>
-      <span class="tracking-status-pill">${escapeHTML(savedStatus)}</span>
-      <h3>Your order is on its demo journey ✨</h3>
-      <p>Order ID: <strong>${escapeHTML(order.id)}</strong></p>
-
-      <div class="tracking-order-meta">
-        <div class="tracking-meta-card">
-          <small>Order date</small>
-          <strong>${escapeHTML(order.createdAt || "Not available")}</strong>
-        </div>
-        <div class="tracking-meta-card">
-          <small>Demo total</small>
-          <strong>₹${(Number(order.total) || 0).toLocaleString("en-IN")}</strong>
-        </div>
-        <div class="tracking-meta-card">
-          <small>Customer</small>
-          <strong>${escapeHTML(customer.name || "Demo customer")}</strong>
-        </div>
-        <div class="tracking-meta-card">
-          <small>Delivery address</small>
-          <strong>${escapeHTML(addressText || "Not saved")}</strong>
-        </div>
-      </div>
-
-      <h4>Order progress</h4>
-      <ol class="tracking-timeline">
-        ${steps.map((step, index) => `
-          <li class="${index <= currentStep ? "completed" : ""}">
-            <strong>${escapeHTML(step)}</strong>
-            <span>${index === currentStep
-              ? "Current demo status"
-              : index < currentStep
-                ? "Demo step completed"
-                : "Not reached yet"}</span>
-          </li>
-        `).join("")}
-      </ol>
-
-      <div class="tracking-items">
-        <h4>Items in your order</h4>
-        ${itemHTML || "<p>Item details are not available.</p>"}
-      </div>
-
-      <p class="tracking-note">
-        This is a local demo status, not a live courier update.
-        No real delivery date is available.
-      </p>
-    `;
-
-    result.hidden = false;
+  if (item.quantity <= 0) {
+    state.cart = state.cart.filter(function (entry) {
+      return entry.id !== id;
+    });
   }
 
-  form.addEventListener("submit", event => {
+  saveStorage();
+  renderCart();
+  renderCounts();
+}
+
+function removeFromCart(id) {
+  state.cart = state.cart.filter(function (item) {
+    return item.id !== id;
+  });
+
+  saveStorage();
+  renderCart();
+  renderCounts();
+  showToast("Item removed from your bag.");
+}
+
+function renderCart() {
+  const list = document.getElementById("cartItems");
+  const subtotal = document.getElementById("cartSubtotal");
+
+  if (!list) return;
+
+  if (!state.cart.length) {
+    list.innerHTML = `
+      <div class="drawer-empty">
+        <strong>Your bag is taking a little break.</strong>
+        <p>Discover something lovely for your routine.</p>
+      </div>`;
+  } else {
+    list.innerHTML = state.cart.map(function (item) {
+      const product = getProduct(item.id);
+      if (!product) return "";
+
+      return `
+        <article class="drawer-product">
+          <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}">
+          <div>
+            <h3>${escapeHTML(product.name)}</h3>
+            <p>${money(product.price)}</p>
+            <div class="quantity-controls">
+              <button data-action="decrease" data-id="${product.id}" aria-label="Decrease quantity">−</button>
+              <span>${item.quantity}</span>
+              <button data-action="increase" data-id="${product.id}" aria-label="Increase quantity">+</button>
+            </div>
+            <button class="remove-button" data-action="remove-cart" data-id="${product.id}">Remove</button>
+          </div>
+          <strong>${money(product.price * item.quantity)}</strong>
+        </article>`;
+    }).join("");
+  }
+
+  if (subtotal) subtotal.textContent = money(getCartTotal());
+}
+
+function toggleWishlist(id) {
+  const product = getProduct(id);
+  if (!product) return;
+
+  if (state.wishlist.includes(id)) {
+    state.wishlist = state.wishlist.filter(function (savedId) {
+      return savedId !== id;
+    });
+    showToast("Removed from your wishlist.");
+  } else {
+    state.wishlist.push(id);
+    showToast("Saved to your wishlist.");
+  }
+
+  saveStorage();
+  renderProducts();
+  renderWishlist();
+  renderCounts();
+}
+
+function renderWishlist() {
+  const list = document.getElementById("wishlistItems");
+  if (!list) return;
+
+  if (!state.wishlist.length) {
+    list.innerHTML = `
+      <div class="drawer-empty">
+        <strong>Your wishlist is waiting.</strong>
+        <p>Tap the heart on anything you love.</p>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = state.wishlist.map(function (id) {
+    const product = getProduct(id);
+    if (!product) return "";
+
+    return `
+      <article class="drawer-product">
+        <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}">
+        <div>
+          <h3>${escapeHTML(product.name)}</h3>
+          <p>${money(product.price)}</p>
+          <button class="remove-button" data-action="wishlist" data-id="${product.id}">Remove</button>
+        </div>
+        <button class="add-button" data-action="add" data-id="${product.id}">Add</button>
+      </article>`;
+  }).join("");
+}
+
+function openDrawer(id) {
+  const drawer = document.getElementById(id);
+  const overlay = document.getElementById("overlay");
+  if (!drawer || !overlay) return;
+
+  document.querySelectorAll(".drawer").forEach(function (other) {
+    other.classList.remove("open");
+    other.setAttribute("aria-hidden", "true");
+  });
+
+  drawer.classList.add("open");
+  drawer.setAttribute("aria-hidden", "false");
+  overlay.hidden = false;
+  document.body.classList.add("no-scroll");
+}
+
+function closeDrawers() {
+  document.querySelectorAll(".drawer").forEach(function (drawer) {
+    drawer.classList.remove("open");
+    drawer.setAttribute("aria-hidden", "true");
+  });
+
+  const overlay = document.getElementById("overlay");
+  if (overlay) overlay.hidden = true;
+  document.body.classList.remove("no-scroll");
+}
+
+function showProductDialog(id) {
+  const product = getProduct(id);
+  const dialog = document.getElementById("productDialog");
+  const content = document.getElementById("productDialogContent");
+
+  if (!product || !dialog || !content) return;
+
+  content.innerHTML = `
+    <div class="dialog-product">
+      <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}">
+      <div class="dialog-product-copy">
+        <span class="eyebrow">${escapeHTML(product.category)} · GLOWVÉ</span>
+        <h2>${escapeHTML(product.name)}</h2>
+        <strong class="dialog-price">${money(product.price)}</strong>
+        <p>${escapeHTML(product.description)}</p>
+        <p>${escapeHTML(product.details)}</p>
+        <button class="button button-dark" data-action="add" data-id="${product.id}">Add to bag +</button>
+        <p class="small-note">Demo product listing. Check actual product ingredients and packaging before purchase.</p>
+      </div>
+    </div>`;
+
+  if (typeof dialog.showModal === "function") dialog.showModal();
+}
+
+function renderStandaloneProduct() {
+  const container = document.getElementById("standaloneProduct");
+  if (!container) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+  const product = getProduct(id) || PRODUCTS[0];
+
+  document.title = product.name + " | Glowvé";
+
+  container.innerHTML = `
+    <section class="detail-product">
+      <img src="${escapeHTML(product.image)}" alt="${escapeHTML(product.name)}">
+      <div class="detail-copy">
+        <span class="eyebrow">${escapeHTML(product.category)} · THE GLOW EDIT</span>
+        <h1>${escapeHTML(product.name)}</h1>
+        <p>${escapeHTML(product.description)}</p>
+        <strong class="detail-price">${money(product.price)}</strong>
+        <p>${escapeHTML(product.details)}</p>
+        <button class="button button-dark" data-action="add" data-id="${product.id}">Add to bag +</button>
+        <button class="button button-light" data-action="wishlist" data-id="${product.id}">♡ Save to wishlist</button>
+        <p class="small-note">Demo storefront: orders and payments are not processed.</p>
+      </div>
+    </section>`;
+}
+
+function setupFilters() {
+  document.querySelectorAll(".filter-button").forEach(function (button) {
+    button.addEventListener("click", function () {
+      state.filter = button.dataset.filter || "All";
+
+      document.querySelectorAll(".filter-button").forEach(function (other) {
+        other.classList.toggle("active", other === button);
+      });
+
+      renderProducts();
+    });
+  });
+}
+
+function setupSearch() {
+  const toggle = document.getElementById("searchToggle");
+  const panel = document.getElementById("searchPanel");
+  const input = document.getElementById("productSearch");
+
+  if (toggle && panel) {
+    toggle.addEventListener("click", function () {
+      panel.hidden = !panel.hidden;
+      if (!panel.hidden && input) input.focus();
+    });
+  }
+
+  if (input) {
+    input.addEventListener("input", function () {
+      state.search = input.value.trim();
+      renderProducts();
+    });
+  }
+}
+
+function setupNewsletter() {
+  const form = document.getElementById("newsletterForm");
+  const message = document.getElementById("newsletterMessage");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const orderId = input.value.trim().toUpperCase();
-    const order = getOrders().find(
-      item => String(item.id || "").toUpperCase() === orderId
-    );
+    if (message) {
+      message.textContent = "Thanks! This demo form isn't connected to an email service yet.";
+    }
 
-    if (!order) {
-      result.innerHTML = `
-        <div class="tracking-error">
-          Order nahi mila. Order ID sahi enter karo aur isi browser
-          mein banaye gaye demo order ka ID use karo.
-        </div>
-      `;
-      result.hidden = false;
+    form.reset();
+  });
+}
+
+function setupCheckout() {
+  const button = document.getElementById("checkoutButton");
+  if (!button) return;
+
+  button.addEventListener("click", function () {
+    if (!state.cart.length) {
+      showToast("Your bag is empty.");
       return;
     }
 
-    showOrder(order);
+    showToast("Demo only: secure checkout is not connected yet.");
+  });
+}
+
+function setupEvents() {
+  document.addEventListener("click", function (event) {
+    const actionElement = event.target.closest("[data-action]");
+
+    if (actionElement) {
+      const action = actionElement.dataset.action;
+      const id = actionElement.dataset.id;
+
+      if (action === "add") addToCart(id);
+      if (action === "wishlist") toggleWishlist(id);
+      if (action === "increase") changeQuantity(id, 1);
+      if (action === "decrease") changeQuantity(id, -1);
+      if (action === "remove-cart") removeFromCart(id);
+
+      return;
+    }
+
+    if (event.target.closest("#cartToggle")) {
+      renderCart();
+      openDrawer("cartDrawer");
+      return;
+    }
+
+    if (event.target.closest("#wishlistToggle")) {
+      renderWishlist();
+      openDrawer("wishlistDrawer");
+      return;
+    }
+
+    if (event.target.closest("[data-close]")) {
+      closeDrawers();
+      return;
+    }
+
+    if (event.target.id === "overlay") {
+      closeDrawers();
+    }
+
+    const productCard = event.target.closest(".product-card");
+    if (productCard && !event.target.closest("a, button")) {
+      const button = productCard.querySelector('[data-action="add"]');
+      if (button) showProductDialog(button.dataset.id);
+    }
   });
 
-  // Allow a tracking link like index.html#order-tracking?id=LUM-DEMO-1234567
-  const params = new URLSearchParams(location.search);
-  const requestedId = params.get("order");
+  const dialog = document.getElementById("productDialog");
+  const closeDialog = document.getElementById("dialogClose");
 
-  if (requestedId) {
-    input.value = requestedId;
-    form.requestSubmit();
+  if (closeDialog && dialog) {
+    closeDialog.addEventListener("click", function () {
+      dialog.close();
+    });
   }
+
+  if (dialog) {
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") closeDrawers();
+  });
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initOrderTracking);
-} else {
-  initOrderTracking();
+function initialiseGlowve() {
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
+
+  renderProducts();
+  renderCart();
+  renderWishlist();
+  renderCounts();
+  renderStandaloneProduct();
+
+  setupFilters();
+  setupSearch();
+  setupNewsletter();
+  setupCheckout();
+  setupEvents();
 }
+
+initialiseGlowve();
